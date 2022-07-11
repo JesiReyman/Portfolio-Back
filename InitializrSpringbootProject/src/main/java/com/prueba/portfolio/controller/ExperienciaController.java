@@ -6,6 +6,7 @@ import com.prueba.portfolio.services.ExperienciaService;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,18 +37,21 @@ public class ExperienciaController {
         return new ResponseEntity<>(listaExperiencia, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(value = {"{id}/edit"})
     public ResponseEntity<Experiencia> editExperiencia(@PathVariable(value = "id") Long id, @RequestBody Experiencia experiencia) {
         Experiencia experienciaEditada = experienciaService.editExperiencia(id, experiencia);
         return new ResponseEntity<>(experienciaEditada, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(value = {"/add"})
     public ResponseEntity<Experiencia> addEducacion(@RequestBody Experiencia experiencia) {
         Experiencia nuevaExperiencia = experienciaService.addExperiencia(experiencia);
         return new ResponseEntity<>(nuevaExperiencia, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping(value = {"/delete/{id}"})
     public void deleteExperiencia(@PathVariable(value = "id") Long id) {
         experienciaService.deleteExperiencia(id);

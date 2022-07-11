@@ -6,6 +6,7 @@ import com.prueba.portfolio.services.UsuarioService;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,18 +37,21 @@ public class UsuarioController {
         return new ResponseEntity<>(listaUsuario, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(value = {"{id}/edit"})
     public ResponseEntity<Usuario> editUsuario(@PathVariable(value = "id") Long id, @RequestBody Usuario usuario) {
         Usuario usuarioEditado = usuarioService.editUsuario(id, usuario);
         return new ResponseEntity<>(usuarioEditado, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(value = {"/add"})
     public ResponseEntity<Usuario> addUsuario(@RequestBody Usuario usuario) {
         Usuario nuevoUsuario = usuarioService.addUsuario(usuario);
         return new ResponseEntity<>(nuevoUsuario, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping(value = {"/delete/{id}"})
     public void deleteUsuario(@PathVariable(value = "id") Long id) {
         usuarioService.deleteUsuario(id);

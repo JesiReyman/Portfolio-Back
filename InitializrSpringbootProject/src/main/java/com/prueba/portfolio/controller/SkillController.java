@@ -6,6 +6,7 @@ import com.prueba.portfolio.services.SkillService;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,18 +38,21 @@ public class SkillController {
         return new ResponseEntity<>(listaSkill, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping(value = {"{id}/edit"})
     public ResponseEntity<Skill> editSkill(@PathVariable(value = "id") Long id, @RequestBody Skill skill) {
         Skill skillEditada = skillService.editSkill(id, skill);
         return new ResponseEntity<>(skillEditada, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(value = {"/add"})
     public ResponseEntity<Skill> addSkill(@RequestBody Skill skill) {
         Skill nuevaSkill = skillService.addSkill(skill);
         return new ResponseEntity<>(nuevaSkill, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping(value = {"/delete/{id}"})
     public void deleteSkill(@PathVariable(value = "id") Long id) {
         skillService.deleteSkill(id);
