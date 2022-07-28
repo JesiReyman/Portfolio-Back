@@ -11,22 +11,23 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Usuario {
+
     @Id
     @GeneratedValue(strategy = javax.persistence.GenerationType.AUTO)
     @Column(nullable = false, updatable = false)
-    private Long id_Usr; 
-    
+    private Long id_Usr;
+
     private String nombreUsr;
     private String apellidoUsr;
     private String descripcionUsr;
     private String fotoUsr;
-    
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "id_Edu")
     private List<Educacion> educacionList;
-    
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "id_Skill")
     private List<Skill> skillList;
-    
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "id_Experiencia")
     private List<Experiencia> experienciaList;
 
@@ -69,7 +70,5 @@ public class Usuario {
     public void setFotoUsr(String fotoUsr) {
         this.fotoUsr = fotoUsr;
     }
-    
-    
-    
+
 }

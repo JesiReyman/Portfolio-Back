@@ -3,7 +3,7 @@ package com.prueba.portfolio.security;
 
 import com.prueba.portfolio.security.jwt.JwtEntryPoint;
 import com.prueba.portfolio.security.jwt.JwtTokenFilter;
-import com.prueba.portfolio.security.service.UserDetailsImplements;
+//import com.prueba.portfolio.security.service.UserDetailsImplements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,8 +23,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class MainSecurity {
-    @Autowired
-    UserDetailsImplements userDetailsImplements;
+   /* @Autowired
+    UserDetailsImplements userDetailsImplements;*/
 
     @Autowired
     JwtEntryPoint jwtEntryPoint;

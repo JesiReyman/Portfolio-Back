@@ -10,9 +10,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter @Setter
+@NoArgsConstructor
 @Entity
 public class Rol {
     @Id
@@ -22,8 +24,8 @@ public class Rol {
     @Enumerated(EnumType.STRING)
     private RolNombre rolNombre;
 
-    public Rol() {
-    }
+    /*public Rol() {
+    }*/
 
     public Rol(RolNombre rolNombre) {
         this.rolNombre = rolNombre;

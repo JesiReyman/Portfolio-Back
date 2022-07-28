@@ -1,7 +1,7 @@
 
 package com.prueba.portfolio.models;
 
-import javax.persistence.Column;
+//import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,14 +11,13 @@ import lombok.Setter;
 @Getter @Setter
 @Entity
 public class Educacion {
+
     @Id
     @GeneratedValue(strategy = javax.persistence.GenerationType.AUTO)
-    
+
     private Long id_Edu;
     private String tituloEdu;
     private int fechaEdu;
     private String descripcionEdu;
-    
-    
-    
+
 }

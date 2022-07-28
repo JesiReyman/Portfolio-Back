@@ -14,9 +14,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter @Setter
+@NoArgsConstructor
 @Entity
 public class UsuarioLogin {
     @Id
@@ -39,9 +41,10 @@ public class UsuarioLogin {
     
     private Set<Rol> roles = new HashSet<>();
 
-    public UsuarioLogin() {
-    }
+    /*public UsuarioLogin() {
+    }*/
 
+     
     public UsuarioLogin(String nombre, String nombreUsuario, String email, String password) {
         this.nombre = nombre;
         this.nombreUsuario = nombreUsuario;
