@@ -27,33 +27,41 @@ public class EducacionController {
         this.educacionService = educacionService;
     }
 
-    @GetMapping(value = {"/{id}"})
+   /* @GetMapping(value = {"/{id}"})
     public ResponseEntity<Educacion> traerEducacion(@PathVariable(value = "id") Long id) {
         Educacion educacion = educacionService.getEducacion(id);
         return new ResponseEntity<>(educacion, HttpStatus.OK);
-    }
+    }*/
 
-    @GetMapping(value = {"/lista"})
-    public ResponseEntity<List<Educacion>> traerTodaEducacion() {
-        List<Educacion> listaEducacion = educacionService.getAllEducacion();
+    
+    @GetMapping(value = {"{userId}/lista"})
+    public ResponseEntity<List<Educacion>> traerTodaEducacionPorUsuarioId(@PathVariable(value = "userId") Long userId) {
+        List<Educacion> listaEducacion = educacionService.getAllEducacionPorUsuarioId(userId);
         return new ResponseEntity<>(listaEducacion, HttpStatus.OK);
     }
+    
+    /*@PostMapping(value = {"{userId}/add"})
+    public void addEducacionByIdUsuario(@RequestBody Educacion educacion, @PathVariable(value = "userId") Long userId) {
+         educacionService.addEducacionByIdUsuario(educacion, userId);
+        //return new ResponseEntity<>(nuevaEducacion, HttpStatus.OK);
+    }*/
+    
 
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @PutMapping(value = {"{id}/edit"})
     public ResponseEntity<Educacion> editEducacion(@PathVariable(value = "id") Long id, @RequestBody Educacion educacion) {
         Educacion educacionEditada = educacionService.editEducacion(id, educacion);
         return new ResponseEntity<>(educacionEditada, HttpStatus.OK);
     }
-
+/*
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(value = {"/add"})
     public ResponseEntity<Educacion> addEducacion(@RequestBody Educacion educacion) {
         Educacion nuevaEducacion = educacionService.addEducacion(educacion);
         return new ResponseEntity<>(nuevaEducacion, HttpStatus.OK);
     }
-
-    @PreAuthorize("hasRole('ADMIN')")
+*/
+   // @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping(value = {"/delete/{id}"})
     public void deleteEducacion(@PathVariable(value = "id") Long id) {
         educacionService.deleteEducacion(id);

@@ -1,6 +1,7 @@
 
 package com.prueba.portfolio.controller;
 
+import com.prueba.portfolio.models.Educacion;
 import com.prueba.portfolio.models.Usuario;
 import com.prueba.portfolio.services.UsuarioService;
 import java.util.List;
@@ -32,7 +33,21 @@ public class UsuarioController {
         Usuario usuario = usuarioService.getUsuario(id);
         return new ResponseEntity<>(usuario, HttpStatus.OK);
     }
-
+    
+    @PostMapping(value = {"/{usuarioId}/nuevaEducacion"})
+    public ResponseEntity<Usuario> addEducacionByIdUsuario(@RequestBody Educacion educacion, @PathVariable(value = "usuarioId") Long usuarioId) {
+        Usuario usuario = usuarioService.addEducacion(educacion, usuarioId);
+        return new ResponseEntity<>(usuario, HttpStatus.OK);
+    }
+    
+    /*
+    @DeleteMapping(value = {"/{usuarioId}/deleteEducacion/{educacionId}"})
+    public ResponseEntity<Usuario> deleteEducacionByIdUsuario(@PathVariable(value = "usuarioId") Long usuarioId, @PathVariable(value = "educacionId") Long educacionId) {
+        Usuario usuario = usuarioService.deleteEducacion(usuarioId, educacionId);
+        return new ResponseEntity<>(usuario, HttpStatus.OK);
+    }*/
+    
+    
     @GetMapping(value = {"/lista"})
     public ResponseEntity<List<Usuario>> traerTodoUsuario() {
         List<Usuario> listaUsuario = usuarioService.getAllUsuario();
