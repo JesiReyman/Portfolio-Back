@@ -28,35 +28,37 @@ public class SkillController {
         this.skillService = skillService;
     }
     
-    @GetMapping(value = {"/{id}"})
+   /* @GetMapping(value = {"/{id}"})
     public ResponseEntity<Skill> traerSkill(@PathVariable(value = "id") Long id) {
         Skill skill = skillService.getSkill(id);
         return new ResponseEntity<>(skill, HttpStatus.OK);
-    }
+    }*/
 
-    @GetMapping(value = {"/lista"})
-    public ResponseEntity<List<Skill>> traerTodaSkill() {
-        List<Skill> listaSkill = skillService.getAllSkill();
+    @GetMapping(value = {"/{nombreUsuario}/lista"})
+    public ResponseEntity<List<Skill>> traerTodaSkillDeUsuario(@PathVariable(value = "nombreUsuario") String nombreUsuario) {
+        List<Skill> listaSkill = skillService.getAllSkillPorUsuario(nombreUsuario);
         return new ResponseEntity<>(listaSkill, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @PutMapping(value = {"{id}/edit"})
-    public ResponseEntity<Skill> editSkill(@PathVariable(value = "id") Long id, @RequestBody Skill skill) {
+    @PreAuthorize("hasRole('ADMIN') || #nombreUsuario == authentication.principal.username")
+    @PutMapping(value = {"/{nombreUsuario}/edit/{id}"})
+    public ResponseEntity<Skill> editSkill(@PathVariable(value = "id") Long id, 
+                                           @RequestBody Skill skill,
+                                           @PathVariable(value = "nombreUsuario") String nombreUsuario) {
         Skill skillEditada = skillService.editSkill(id, skill);
         return new ResponseEntity<>(skillEditada, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping(value = {"/add"})
-    public ResponseEntity<Skill> addSkill(@RequestBody Skill skill) {
-        Skill nuevaSkill = skillService.addSkill(skill);
+    @PreAuthorize("hasRole('ADMIN') || #nombreUsuario == authentication.principal.username")
+    @PostMapping(value = {"/{nombreUsuario}/add"})
+    public ResponseEntity<Skill> addSkillAUnUsuario(@RequestBody Skill skill, @PathVariable(value = "nombreUsuario") String nombreUsuario) {
+        Skill nuevaSkill = skillService.addSkillAUsuario(skill, nombreUsuario);
         return new ResponseEntity<>(nuevaSkill, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @DeleteMapping(value = {"/delete/{id}"})
-    public void deleteSkill(@PathVariable(value = "id") Long id) {
+    @PreAuthorize("hasRole('ADMIN') || #nombreUsuario == authentication.principal.username")
+    @DeleteMapping(value = {"/{nombreUsuario}/delete/{id}"})
+    public void deleteSkill(@PathVariable(value = "id") Long id, @PathVariable(value = "nombreUsuario") String nombreUsuario) {
         skillService.deleteSkill(id);
     }
 }

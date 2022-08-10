@@ -2,8 +2,10 @@
 package com.prueba.portfolio.services;
 
 import com.prueba.portfolio.models.Educacion;
-import com.prueba.portfolio.models.Usuario;
+//import com.prueba.portfolio.models.Perfil;
 import com.prueba.portfolio.repository.EducacionRepo;
+import com.prueba.portfolio.security.entity.UsuarioLogin;
+import com.prueba.portfolio.security.repository.UsuarioRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +20,12 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class EducacionService {
     private final EducacionRepo eduRepo;
+    private final UsuarioRepository usuarioLoginRepo;
     
     @Autowired
-    public EducacionService(EducacionRepo eduRepo) {
+    public EducacionService(EducacionRepo eduRepo, UsuarioRepository usuarioLoginRepo) {
         this.eduRepo = eduRepo;
+        this.usuarioLoginRepo = usuarioLoginRepo;
     }
     
     /*@PersistenceContext
@@ -31,13 +35,13 @@ public class EducacionService {
         return eduRepo.save(educacion);
     }*/
     
-    /*public void addEducacionByIdUsuario(Educacion educacion, Long usuarioId) {
-        Usuario usuario = entityManager.getReference(Usuario.class, usuarioId);
-        educacion.setUsuario(usuario);
+    public Educacion agregarEducacionAUsuario(Educacion educacion, String nombreUsuario) {
+        UsuarioLogin usuario = usuarioLoginRepo.findByNombreUsuario(nombreUsuario).orElse(null);
+        //educacion.setUsuario(usuario);
         usuario.addEducacion(educacion);
-        entityManager.persist(educacion);
+        //entityManager.persist(educacion);
         return eduRepo.save(educacion);
-    }*/
+    }
     
 /*
     public List<Educacion> getAllEducacionByUserId(Long userId) {
@@ -56,7 +60,9 @@ public class EducacionService {
         return filteredValues;
     }*/
     
-    public List<Educacion> getAllEducacionPorUsuarioId(Long usuarioId) {
+    public List<Educacion> getAllEducacionPorUsuario(String nombreUsuario) {
+        UsuarioLogin usuario = usuarioLoginRepo.findByNombreUsuario(nombreUsuario).orElse(null);
+        Long usuarioId = usuario.getId();
         return eduRepo.findByUsuarioId(usuarioId);
     }
 

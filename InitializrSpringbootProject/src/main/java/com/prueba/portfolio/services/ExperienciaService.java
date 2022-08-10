@@ -3,6 +3,8 @@ package com.prueba.portfolio.services;
 
 import com.prueba.portfolio.models.Experiencia;
 import com.prueba.portfolio.repository.ExperienciaRepo;
+import com.prueba.portfolio.security.entity.UsuarioLogin;
+import com.prueba.portfolio.security.repository.UsuarioRepository;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,18 +14,24 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class ExperienciaService {
     private final ExperienciaRepo experienciaRepo;
+    private final UsuarioRepository usuarioLoginRepo;
 
     @Autowired
-     public ExperienciaService(ExperienciaRepo experienciaRepo) {
+     public ExperienciaService(ExperienciaRepo experienciaRepo, UsuarioRepository usuarioLoginRepo) {
         this.experienciaRepo = experienciaRepo;
+        this.usuarioLoginRepo = usuarioLoginRepo;
     }
 
-    public Experiencia addExperiencia(Experiencia experiencia) {
+    public Experiencia addExperienciaAUsuario(Experiencia experiencia, String nombreUsuario) {
+        UsuarioLogin usuario = usuarioLoginRepo.findByNombreUsuario(nombreUsuario).orElse(null);
+        usuario.addExperiencia(experiencia);
         return experienciaRepo.save(experiencia);
     }
 
-    public List<Experiencia> getAllExperiencia() {
-        return experienciaRepo.findAll();
+    public List<Experiencia> getAllExperienciaPorUsuario(String nombreUsuario) {
+        UsuarioLogin usuario = usuarioLoginRepo.findByNombreUsuario(nombreUsuario).orElse(null);
+        Long usuarioId = usuario.getId();
+        return experienciaRepo.findByUsuarioId(usuarioId);
     }
 
     public Experiencia getExperiencia(Long id) {

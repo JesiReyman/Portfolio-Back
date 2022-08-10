@@ -3,6 +3,7 @@ package com.prueba.portfolio.models;
 
 //import javax.persistence.Column;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.prueba.portfolio.security.entity.UsuarioLogin;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -35,7 +36,7 @@ public class Educacion {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="usuario_id", nullable=false)
     @JsonIgnore
-    public Usuario usuario;
+    private UsuarioLogin usuario;
 
     public Educacion(String tituloEdu, int fechaEdu, String descripcionEdu) {
         this.tituloEdu = tituloEdu;

@@ -34,22 +34,26 @@ public class EducacionController {
     }*/
 
     
-    @GetMapping(value = {"{userId}/lista"})
-    public ResponseEntity<List<Educacion>> traerTodaEducacionPorUsuarioId(@PathVariable(value = "userId") Long userId) {
-        List<Educacion> listaEducacion = educacionService.getAllEducacionPorUsuarioId(userId);
+    @GetMapping(value = {"/{nombreUsuario}/lista"})
+    public ResponseEntity<List<Educacion>> traerTodaEducacionPorUsuario(@PathVariable(value = "nombreUsuario") String nombreUsuario) {
+        List<Educacion> listaEducacion = educacionService.getAllEducacionPorUsuario(nombreUsuario);
         return new ResponseEntity<>(listaEducacion, HttpStatus.OK);
     }
     
-    /*@PostMapping(value = {"{userId}/add"})
-    public void addEducacionByIdUsuario(@RequestBody Educacion educacion, @PathVariable(value = "userId") Long userId) {
-         educacionService.addEducacionByIdUsuario(educacion, userId);
-        //return new ResponseEntity<>(nuevaEducacion, HttpStatus.OK);
-    }*/
+    @PreAuthorize("hasRole('ADMIN') || #nombreUsuario == authentication.principal.username")
+    @PostMapping(value = {"/{nombreUsuario}/add"})
+    public ResponseEntity<Educacion> addEducacionAUsuario(@RequestBody Educacion educacion, 
+                                                          @PathVariable(value = "nombreUsuario") String nombreUsuario) {
+        Educacion nuevaEducacion = educacionService.agregarEducacionAUsuario(educacion, nombreUsuario);
+        return new ResponseEntity<>(nuevaEducacion, HttpStatus.OK);
+    }
     
 
-    //@PreAuthorize("hasRole('ADMIN')")
-    @PutMapping(value = {"{id}/edit"})
-    public ResponseEntity<Educacion> editEducacion(@PathVariable(value = "id") Long id, @RequestBody Educacion educacion) {
+    @PreAuthorize("hasRole('ADMIN') || #nombreUsuario == authentication.principal.username")
+    @PutMapping(value = {"/{nombreUsuario}/edit/{id}"})
+    public ResponseEntity<Educacion> editEducacion(@PathVariable(value = "id") Long id, 
+                                                   @RequestBody Educacion educacion,
+                                                   @PathVariable(value = "nombreUsuario") String nombreUsuario) {
         Educacion educacionEditada = educacionService.editEducacion(id, educacion);
         return new ResponseEntity<>(educacionEditada, HttpStatus.OK);
     }
@@ -61,9 +65,9 @@ public class EducacionController {
         return new ResponseEntity<>(nuevaEducacion, HttpStatus.OK);
     }
 */
-   // @PreAuthorize("hasRole('ADMIN')")
-    @DeleteMapping(value = {"/delete/{id}"})
-    public void deleteEducacion(@PathVariable(value = "id") Long id) {
+    @PreAuthorize("hasRole('ADMIN') || #nombreUsuario == authentication.principal.username")
+    @DeleteMapping(value = {"/{nombreUsuario}/delete/{id}"})
+    public void deleteEducacion(@PathVariable(value = "id") Long id, @PathVariable(value = "nombreUsuario") String nombreUsuario) {
         educacionService.deleteEducacion(id);
     }
 }

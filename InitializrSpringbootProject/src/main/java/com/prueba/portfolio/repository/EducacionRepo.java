@@ -9,6 +9,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EducacionRepo extends JpaRepository<Educacion, Long>{
-    List<Educacion> findByUsuarioId(Long usuarioId);
-    
+    List<Educacion> findByUsuarioId(Long usuarioId);    
 }

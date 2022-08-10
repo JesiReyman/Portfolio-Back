@@ -27,35 +27,39 @@ public class ExperienciaController {
         this.experienciaService = experienciaService;
     }
     
+    /*
     @GetMapping(value = {"/{id}"})
     public ResponseEntity<Experiencia> traerExperiencia(@PathVariable(value = "id") Long id) {
         Experiencia experiencia = experienciaService.getExperiencia(id);
         return new ResponseEntity<>(experiencia, HttpStatus.OK);
-    }
+    }*/
 
-    @GetMapping(value = {"/lista"})
-    public ResponseEntity<List<Experiencia>> traerTodaExperiencia() {
-        List<Experiencia> listaExperiencia = experienciaService.getAllExperiencia();
+    @GetMapping(value = {"/{nombreUsuario}/lista"})
+    public ResponseEntity<List<Experiencia>> traerTodaExperienciaDeUsuario(@PathVariable(value = "nombreUsuario") String nombreUsuario) {
+        List<Experiencia> listaExperiencia = experienciaService.getAllExperienciaPorUsuario(nombreUsuario);
         return new ResponseEntity<>(listaExperiencia, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @PutMapping(value = {"{id}/edit"})
-    public ResponseEntity<Experiencia> editExperiencia(@PathVariable(value = "id") Long id, @RequestBody Experiencia experiencia) {
+    @PreAuthorize("hasRole('ADMIN') || #nombreUsuario == authentication.principal.username")
+    @PutMapping(value = {"/{nombreUsuario}/edit/{id}"})
+    public ResponseEntity<Experiencia> editExperiencia(@PathVariable(value = "id") Long id, 
+                                                       @RequestBody Experiencia experiencia, 
+                                                       @PathVariable(value = "nombreUsuario") String nombreUsuario) {
         Experiencia experienciaEditada = experienciaService.editExperiencia(id, experiencia);
         return new ResponseEntity<>(experienciaEditada, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping(value = {"/add"})
-    public ResponseEntity<Experiencia> addEducacion(@RequestBody Experiencia experiencia) {
-        Experiencia nuevaExperiencia = experienciaService.addExperiencia(experiencia);
+    @PreAuthorize("hasRole('ADMIN') || #nombreUsuario == authentication.principal.username")
+    @PostMapping(value = {"/{nombreUsuario}/add"})
+    public ResponseEntity<Experiencia> addExperienciaAUsuario(@RequestBody Experiencia experiencia, 
+                                                              @PathVariable(value = "nombreUsuario") String nombreUsuario) {
+        Experiencia nuevaExperiencia = experienciaService.addExperienciaAUsuario(experiencia, nombreUsuario);
         return new ResponseEntity<>(nuevaExperiencia, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @DeleteMapping(value = {"/delete/{id}"})
-    public void deleteExperiencia(@PathVariable(value = "id") Long id) {
+    @PreAuthorize("hasRole('ADMIN') || #nombreUsuario == authentication.principal.username")
+    @DeleteMapping(value = {"/{nombreUsuario}/delete/{id}"})
+    public void deleteExperiencia(@PathVariable(value = "id") Long id, @PathVariable(value = "nombreUsuario") String nombreUsuario) {
         experienciaService.deleteExperiencia(id);
     }
 }
