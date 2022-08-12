@@ -27,7 +27,7 @@ public class Educacion {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     //@Column(nullable = false, updatable = false)
-    private Long educacionId;
+    private Long id_Edu;
     
     private String tituloEdu;
     private int fechaEdu;
