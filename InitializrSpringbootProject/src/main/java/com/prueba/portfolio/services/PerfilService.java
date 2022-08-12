@@ -61,6 +61,7 @@ public class PerfilService {
         perfilAEditar.setDescripcion(perfil.getDescripcion());
         perfilAEditar.setUrlFoto(perfil.getUrlFoto());
         perfilAEditar.setNombre(perfil.getNombre());
+        perfilAEditar.setUrlBanner(perfil.getUrlBanner());
         
         return perfilRepo.save(perfilAEditar);
     }

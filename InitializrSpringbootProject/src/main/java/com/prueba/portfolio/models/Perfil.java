@@ -21,7 +21,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-//@Getter @Setter
+@Getter @Setter
 @NoArgsConstructor
 @Table(name="PERFIL")
 @Entity
@@ -35,6 +35,7 @@ public class Perfil {
     private String nombre;
     private String apellido;
     private String descripcion;
+    private String urlBanner;
     private String urlFoto;
     
     @JsonBackReference
@@ -42,16 +43,15 @@ public class Perfil {
     @JoinColumn(name = "id")
     @MapsId
     private UsuarioLogin usuario;
-    
 
-    public Perfil(String nombreUsr, String apellidoUsr, String descripcionUsr, String fotoUsr) {
-        this.nombre = nombreUsr;
-        this.apellido = apellidoUsr;
-        this.descripcion = descripcionUsr;
-        this.urlFoto = fotoUsr;
+    public Perfil(String nombre, String apellido, String descripcion, String urlBanner, String urlFoto) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.descripcion = descripcion;
+        this.urlBanner = urlBanner;
+        this.urlFoto = urlFoto;
     }
-
-
+/*
     public Long getId() {
         return id;
     }
@@ -84,6 +84,14 @@ public class Perfil {
         this.descripcion = descripcion;
     }
 
+    public String getUrlBanner() {
+        return urlBanner;
+    }
+
+    public void setUrlBanner(String urlBanner) {
+        this.urlBanner = urlBanner;
+    }
+
     public String getUrlFoto() {
         return urlFoto;
     }
@@ -99,5 +107,6 @@ public class Perfil {
     public void setUsuario(UsuarioLogin usuario) {
         this.usuario = usuario;
     }
+    */
     
 }
