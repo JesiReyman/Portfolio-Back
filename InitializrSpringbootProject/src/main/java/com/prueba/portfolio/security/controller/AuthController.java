@@ -16,6 +16,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -24,6 +25,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -91,5 +94,11 @@ public class AuthController {
         JwtDto jwtDto = new JwtDto(jwt);
         
         return new ResponseEntity<JwtDto>(jwtDto, HttpStatus.OK);
+    }
+    
+    @PreAuthorize("hasRole('ADMIN') || #nombreUsuario == authentication.principal.username")
+    @DeleteMapping("/delete/{nombreUsuario}")
+    public void delete(@PathVariable(value = "nombreUsuario") String nombreUsuario){
+        usuarioLoginService.delete(nombreUsuario);
     }
 }

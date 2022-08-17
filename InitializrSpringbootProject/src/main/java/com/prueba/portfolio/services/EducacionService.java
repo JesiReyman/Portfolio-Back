@@ -73,7 +73,8 @@ public class EducacionService {
     public Educacion editEducacion(Long id, Educacion educacion) {
         Educacion educacionAEditar = eduRepo.findById(id).orElse(null);
         educacionAEditar.setDescripcionEdu(educacion.getDescripcionEdu());
-        educacionAEditar.setFechaEdu(educacion.getFechaEdu());
+        educacionAEditar.setAnioInicio(educacion.getAnioInicio());
+        educacionAEditar.setEstado(educacion.getEstado());
         educacionAEditar.setTituloEdu(educacion.getTituloEdu());
         
         return eduRepo.save(educacionAEditar);

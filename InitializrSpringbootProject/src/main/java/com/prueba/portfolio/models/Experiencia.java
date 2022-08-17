@@ -1,8 +1,10 @@
 
 package com.prueba.portfolio.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.prueba.portfolio.security.entity.UsuarioLogin;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -25,7 +27,11 @@ public class Experiencia {
     private Long experienciaId;
     
     private String tituloExperiencia;
-    private int fechaExperiencia;
+    @JsonFormat(pattern="yyyy")
+    private Date anioInicio;
+    @JsonFormat(pattern="yyyy")
+    private Date anioFin;
+    private boolean actualidad;
     private String descripcionExperiencia;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -33,10 +39,12 @@ public class Experiencia {
     @JsonIgnore
     private UsuarioLogin usuario;
 
-    public Experiencia(String tituloExperiencia, int fechaExperiencia, String descripcionExperiencia) {
+    public Experiencia(String tituloExperiencia, Date anioInicio, Date anioFin, boolean actualidad, String descripcionExperiencia) {
         this.tituloExperiencia = tituloExperiencia;
-        this.fechaExperiencia = fechaExperiencia;
+        this.anioInicio = anioInicio;
+        this.anioFin = anioFin;
+        this.actualidad = actualidad;
         this.descripcionExperiencia = descripcionExperiencia;
     }
-    
+
 }

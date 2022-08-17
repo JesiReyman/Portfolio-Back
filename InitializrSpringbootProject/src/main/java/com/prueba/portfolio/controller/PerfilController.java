@@ -40,9 +40,6 @@ public class PerfilController {
         
     }
     
-   // Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-   // UserDetails usuarioPrincipal = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    
     @GetMapping(value = {"/{nombreUsuario}"})
     public ResponseEntity<Perfil> traerPerfil(@PathVariable(value = "nombreUsuario") String nombreUsuario) {
         Perfil perfil = perfilService.getPerfil(nombreUsuario);

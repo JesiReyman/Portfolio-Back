@@ -41,7 +41,9 @@ public class ExperienciaService {
     public Experiencia editExperiencia(Long id, Experiencia experiencia) {
         Experiencia experienciaAEditar = experienciaRepo.findById(id).orElse(null);
         experienciaAEditar.setDescripcionExperiencia(experiencia.getDescripcionExperiencia());
-        experienciaAEditar.setFechaExperiencia(experiencia.getFechaExperiencia());
+        experienciaAEditar.setAnioInicio(experiencia.getAnioInicio());
+        experienciaAEditar.setAnioFin(experiencia.getAnioFin());
+        experienciaAEditar.setActualidad(experiencia.isActualidad());
         experienciaAEditar.setTituloExperiencia(experiencia.getTituloExperiencia());
         
         return experienciaRepo.save(experienciaAEditar);

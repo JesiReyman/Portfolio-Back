@@ -55,7 +55,7 @@ public class UsuarioLogin {
     private Set<Rol> roles = new HashSet<>();
 
     @JsonManagedReference
-    @OneToOne(mappedBy="usuario", cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToOne(mappedBy="usuario", cascade = {CascadeType.MERGE}, orphanRemoval = true)
     private Perfil perfil;
     
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.MERGE,
@@ -98,5 +98,10 @@ public class UsuarioLogin {
     public void addSkill(Skill skill) {
         skillList.add(skill);
         skill.setUsuario(this);
+    }
+    
+    public void addPerfil(Perfil perfil) {
+       // perfil.add(perfil);
+        perfil.setUsuario(this);
     }
 }

@@ -2,8 +2,10 @@
 package com.prueba.portfolio.models;
 
 //import javax.persistence.Column;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.prueba.portfolio.security.entity.UsuarioLogin;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,7 +33,10 @@ public class Educacion {
     private Long id_Edu;
     
     private String tituloEdu;
-    private int fechaEdu;
+    //@Size(min = 4, max = 4)
+    @JsonFormat(pattern="yyyy")
+    private Date anioInicio;
+    private String estado;
     private String descripcionEdu;
     
     @ManyToOne(fetch = FetchType.LAZY)
@@ -38,11 +44,14 @@ public class Educacion {
     @JsonIgnore
     private UsuarioLogin usuario;
 
-    public Educacion(String tituloEdu, int fechaEdu, String descripcionEdu) {
+    public Educacion(String tituloEdu, Date anioInicio, String estado, String descripcionEdu) {
         this.tituloEdu = tituloEdu;
-        this.fechaEdu = fechaEdu;
+        this.anioInicio = anioInicio;
+        this.estado = estado;
         this.descripcionEdu = descripcionEdu;
     }
+
+    
     
     
 }
