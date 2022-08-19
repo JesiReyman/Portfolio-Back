@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.prueba.portfolio.models.Educacion;
 import com.prueba.portfolio.models.Experiencia;
 import com.prueba.portfolio.models.Perfil;
+import com.prueba.portfolio.models.Proyecto;
 import com.prueba.portfolio.models.Skill;
 import com.sun.istack.NotNull;
 import java.util.HashSet;
@@ -72,6 +73,11 @@ public class UsuarioLogin {
         orphanRemoval = true)
     //@JsonIgnore
     private List<Skill> skillList; 
+    
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.MERGE,
+        orphanRemoval = true)
+    //@JsonIgnore
+    private List<Proyecto> proyectoList; 
      
     public UsuarioLogin(String nombre, String nombreUsuario, String email, String password) {
         this.nombre = nombre;
@@ -98,6 +104,11 @@ public class UsuarioLogin {
     public void addSkill(Skill skill) {
         skillList.add(skill);
         skill.setUsuario(this);
+    }
+    
+    public void addProyecto(Proyecto proyecto) {
+        proyectoList.add(proyecto);
+        proyecto.setUsuario(this);
     }
     
     public void addPerfil(Perfil perfil) {
