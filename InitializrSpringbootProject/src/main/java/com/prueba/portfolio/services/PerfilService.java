@@ -62,36 +62,15 @@ public class PerfilService {
         perfilAEditar.setUrlFoto(perfil.getUrlFoto());
         perfilAEditar.setNombre(perfil.getNombre());
         perfilAEditar.setUrlBanner(perfil.getUrlBanner());
+        perfilAEditar.setUrlGitHub(perfil.getUrlGitHub());
+        perfilAEditar.setUrlLinkedIn(perfil.getUrlLinkedIn());
         
         return perfilRepo.save(perfilAEditar);
     }
-/*
-    public void deletePerfil(String nombreUsuario) {
-        UsuarioLogin usuarioLogin = usuarioLoginRepo.findByNombreUsuario(nombreUsuario).orElse(null);
-        Long id = usuarioLogin.getId();
-        System.out.println("el id a eliminar es: " + id);
-        perfilRepo.deleteById(id);
-        
-    }*/
     
     public void deletePerfil(Long id) {
         perfilRepo.deleteById(id); 
     }
     
-    /*
-    public Perfil addEducacion(Educacion educacion, Long usuarioId){
-        Perfil usuario = this.getPerfil(usuarioId);
-        usuario.addEducacion(educacion);
-        return perfilRepo.save(usuario);
-    }*/
     
-    /*
-    public Perfil deleteEducacion(Long usuarioId, Long educacionId){
-        Educacion educacion = educacionRepo.findById(educacionId).orElse(null);
-        educacionRepo.delete(educacion);
-        Perfil usuario = this.getPerfil(usuarioId);
-        //usuario.removeEducacion(educacion);
-        return perfilRepo.save(usuario);
-    }
-    */
 }

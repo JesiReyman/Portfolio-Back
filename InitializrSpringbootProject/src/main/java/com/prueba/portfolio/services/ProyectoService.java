@@ -31,9 +31,9 @@ public class ProyectoService {
     }
     
     public List<Proyecto> getAllProyectoPorUsuario(String nombreUsuario) {
-        UsuarioLogin usuario = usuarioLoginRepo.findByNombreUsuario(nombreUsuario).orElse(null);
-        Long usuarioId = usuario.getId();
-        return proyectoRepo.findByUsuarioId(usuarioId);
+       // UsuarioLogin usuario = usuarioLoginRepo.findByNombreUsuario(nombreUsuario).orElse(null);
+       // Long usuarioId = usuario.getId();
+        return proyectoRepo.findByUsuarioNombreUsuario(nombreUsuario);
     }
     
     public Proyecto editProyecto(Long id, Proyecto proyecto) {

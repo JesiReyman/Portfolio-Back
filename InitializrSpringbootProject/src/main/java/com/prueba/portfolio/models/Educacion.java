@@ -1,7 +1,7 @@
 
 package com.prueba.portfolio.models;
 
-//import javax.persistence.Column;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.prueba.portfolio.security.entity.UsuarioLogin;
@@ -15,11 +15,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 
 @Getter @Setter
 @NoArgsConstructor
@@ -29,12 +28,13 @@ public class Educacion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    //@Column(nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false)
     private Long id_Edu;
     
     private String tituloEdu;
-    //@Size(min = 4, max = 4)
-    @JsonFormat(pattern="yyyy")
+  
+    //@Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy")
     private Date anioInicio;
     private String estado;
     private String descripcionEdu;
@@ -51,7 +51,4 @@ public class Educacion {
         this.descripcionEdu = descripcionEdu;
     }
 
-    
-    
-    
 }

@@ -29,9 +29,9 @@ public class ExperienciaService {
     }
 
     public List<Experiencia> getAllExperienciaPorUsuario(String nombreUsuario) {
-        UsuarioLogin usuario = usuarioLoginRepo.findByNombreUsuario(nombreUsuario).orElse(null);
-        Long usuarioId = usuario.getId();
-        return experienciaRepo.findByUsuarioId(usuarioId);
+       // UsuarioLogin usuario = usuarioLoginRepo.findByNombreUsuario(nombreUsuario).orElse(null);
+       // Long usuarioId = usuario.getId();
+        return experienciaRepo.findByUsuarioNombreUsuario(nombreUsuario);
     }
 
     public Experiencia getExperiencia(Long id) {

@@ -37,6 +37,8 @@ public class Perfil {
     private String descripcion;
     private String urlBanner;
     private String urlFoto;
+    private String urlGitHub;
+    private String urlLinkedIn;
     
     @JsonBackReference
     @OneToOne(fetch = FetchType.LAZY)
@@ -44,69 +46,15 @@ public class Perfil {
     @MapsId
     private UsuarioLogin usuario;
 
-    public Perfil(String nombre, String apellido, String descripcion, String urlBanner, String urlFoto) {
+    public Perfil(String nombre, String apellido, String descripcion, String urlBanner, String urlFoto, String urlGitHub, String urlLinkedIn) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.descripcion = descripcion;
         this.urlBanner = urlBanner;
         this.urlFoto = urlFoto;
-    }
-/*
-    public Long getId() {
-        return id;
+        this.urlGitHub = urlGitHub;
+        this.urlLinkedIn = urlLinkedIn;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public String getUrlBanner() {
-        return urlBanner;
-    }
-
-    public void setUrlBanner(String urlBanner) {
-        this.urlBanner = urlBanner;
-    }
-
-    public String getUrlFoto() {
-        return urlFoto;
-    }
-
-    public void setUrlFoto(String urlFoto) {
-        this.urlFoto = urlFoto;
-    }
-
-    public UsuarioLogin getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(UsuarioLogin usuario) {
-        this.usuario = usuario;
-    }
-    */
     
 }

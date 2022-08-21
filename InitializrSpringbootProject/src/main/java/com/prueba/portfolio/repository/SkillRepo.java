@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SkillRepo extends JpaRepository<Skill, Long>{
     List<Skill> findByUsuarioId(Long usuarioId);
+    
+    List<Skill> findByUsuarioNombreUsuario(String nombreUsuario);
 }

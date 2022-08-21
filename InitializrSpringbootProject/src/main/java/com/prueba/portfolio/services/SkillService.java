@@ -29,9 +29,9 @@ public class SkillService {
     }
 
     public List<Skill> getAllSkillPorUsuario(String nombreUsuario) {
-        UsuarioLogin usuario = usuarioLoginRepo.findByNombreUsuario(nombreUsuario).orElse(null);
-        Long usuarioId = usuario.getId();
-        return skillRepo.findByUsuarioId(usuarioId);
+       // UsuarioLogin usuario = usuarioLoginRepo.findByNombreUsuario(nombreUsuario).orElse(null);
+       // Long usuarioId = usuario.getId();
+        return skillRepo.findByUsuarioNombreUsuario(nombreUsuario);
     }
 
     public Skill getSkill(Long id) {

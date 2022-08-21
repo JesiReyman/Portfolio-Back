@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProyectoRepo extends JpaRepository<Proyecto, Long>{
     List<Proyecto> findByUsuarioId(Long usuarioId);
+    
+    List<Proyecto> findByUsuarioNombreUsuario(String nombreUsuario);
 }
