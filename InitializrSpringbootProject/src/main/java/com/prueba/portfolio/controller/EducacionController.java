@@ -18,7 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://portfolio-9dcf2.web.app")
 @RequestMapping("/educacion")
 public class EducacionController {
     private final EducacionService educacionService;
@@ -27,13 +28,7 @@ public class EducacionController {
         this.educacionService = educacionService;
     }
 
-   /* @GetMapping(value = {"/{id}"})
-    public ResponseEntity<Educacion> traerEducacion(@PathVariable(value = "id") Long id) {
-        Educacion educacion = educacionService.getEducacion(id);
-        return new ResponseEntity<>(educacion, HttpStatus.OK);
-    }*/
-
-    
+  
     @GetMapping(value = {"/{nombreUsuario}/lista"})
     public ResponseEntity<List<Educacion>> traerTodaEducacionPorUsuario(@PathVariable(value = "nombreUsuario") String nombreUsuario) {
         List<Educacion> listaEducacion = educacionService.getAllEducacionPorUsuario(nombreUsuario);
@@ -57,14 +52,7 @@ public class EducacionController {
         Educacion educacionEditada = educacionService.editEducacion(id, educacion);
         return new ResponseEntity<>(educacionEditada, HttpStatus.OK);
     }
-/*
-    @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping(value = {"/add"})
-    public ResponseEntity<Educacion> addEducacion(@RequestBody Educacion educacion) {
-        Educacion nuevaEducacion = educacionService.addEducacion(educacion);
-        return new ResponseEntity<>(nuevaEducacion, HttpStatus.OK);
-    }
-*/
+
     @PreAuthorize("hasRole('ADMIN') || #nombreUsuario == authentication.principal.username")
     @DeleteMapping(value = {"/{nombreUsuario}/delete/{id}"})
     public void deleteEducacion(@PathVariable(value = "id") Long id, @PathVariable(value = "nombreUsuario") String nombreUsuario) {

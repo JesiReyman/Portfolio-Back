@@ -30,7 +30,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://portfolio-9dcf2.web.app")
 @RequestMapping("/perfil")
 public class PerfilController {
     private final PerfilService perfilService;
@@ -46,27 +47,6 @@ public class PerfilController {
         return new ResponseEntity<>(perfil, HttpStatus.OK);
     }
     
-    /*
-    @PostMapping(value = {"/{usuarioId}/nuevaEducacion"})
-    public ResponseEntity<Usuario> addEducacionByIdUsuario(@RequestBody Educacion educacion, @PathVariable(value = "usuarioId") Long usuarioId) {
-        Perfil perfil = perfilService.addEducacion(educacion, usuarioId);
-        return new ResponseEntity<>(perfil, HttpStatus.OK);
-    }*/
-    
-    /*
-    @DeleteMapping(value = {"/{usuarioId}/deleteEducacion/{educacionId}"})
-    public ResponseEntity<Usuario> deleteEducacionByIdUsuario(@PathVariable(value = "usuarioId") Long usuarioId, @PathVariable(value = "educacionId") Long educacionId) {
-        Perfil perfil = perfilService.deleteEducacion(usuarioId, educacionId);
-        return new ResponseEntity<>(perfil, HttpStatus.OK);
-    }*/
-    
-    
-    /*
-    @GetMapping(value = {"/lista"})
-    public ResponseEntity<List<Usuario>> traerTodoUsuario() {
-        List<Usuario> listaUsuario = perfilService.getAllUsuario();
-        return new ResponseEntity<>(listaUsuario, HttpStatus.OK);
-    }*/
 
     @PreAuthorize("hasRole('ADMIN') || #nombreUsuario == authentication.principal.username")
     @PutMapping(value = {"/{nombreUsuario}/edit/{id}"})
@@ -77,12 +57,6 @@ public class PerfilController {
         return new ResponseEntity<>(perfilEditado, HttpStatus.OK);
     }
 
-    //@PreAuthorize("hasRole('ADMIN')")
-   /* @PostMapping(value = {"{nombreUsuario}/add"})
-    public ResponseEntity<Usuario> addPerfil(@RequestBody Perfil perfil, @PathVariable(value = "nombreUsuario") Long nombreUsuario) {
-        Perfil nuevoPerfil = perfilService.addPerfil(perfil, nombreUsuario);
-        return new ResponseEntity<>(nuevoPerfil, HttpStatus.OK);
-    }*/
     
     @PreAuthorize("hasRole('ADMIN') || #nombreUsuario == authentication.principal.username")
     @PostMapping(value = {"/{nombreUsuario}/add"})
@@ -97,21 +71,5 @@ public class PerfilController {
     public void deletePerfil(@PathVariable(value = "nombreUsuario") String nombreUsuario, @PathVariable(value = "id") Long id) {
         perfilService.deletePerfil(id);
     }
-    
-    /*
-    @PreAuthorize("hasRole('ADMIN') || #nombreUsuario == authentication.principal.username")
-    @DeleteMapping(value = {"/{nombreUsuario}/delete"})
-    public void deletePerfil(@PathVariable(value = "nombreUsuario") String nombreUsuario) {
-        perfilService.deletePerfil(nombreUsuario);
-    }*/
-    /*
-    @PreAuthorize("hasRole('ADMIN') || #nombreUsuario == authentication.principal.username")
-    @GetMapping(value = {"/{nombreUsuario}/principal"})
-    public String getPrincipal(@PathVariable(value = "nombreUsuario") String nombreUsuario){
-        //Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); 
-         String name = "Jesi";
-        return name;
-}*/
-    
     
 }

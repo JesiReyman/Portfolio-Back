@@ -3,9 +3,11 @@ package com.prueba.portfolio.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.prueba.portfolio.security.entity.UsuarioLogin;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,7 +23,8 @@ import lombok.Setter;
 public class Skill {
 
     @Id
-    @GeneratedValue(strategy = javax.persistence.GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(nullable = false, updatable = false)
     private Long skillId;
     
     private String nombreSkill;
