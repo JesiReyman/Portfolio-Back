@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
-//@CrossOrigin(origins = "https://portfolio-9dcf2.web.app")
+//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://portfolio-9dcf2.web.app")
 @RequestMapping("/skill")
 
 public class SkillController {
@@ -29,11 +29,6 @@ public class SkillController {
         this.skillService = skillService;
     }
     
-   /* @GetMapping(value = {"/{id}"})
-    public ResponseEntity<Skill> traerSkill(@PathVariable(value = "id") Long id) {
-        Skill skill = skillService.getSkill(id);
-        return new ResponseEntity<>(skill, HttpStatus.OK);
-    }*/
 
     @GetMapping(value = {"/{nombreUsuario}/lista"})
     public ResponseEntity<List<Skill>> traerTodaSkillDeUsuario(@PathVariable(value = "nombreUsuario") String nombreUsuario) {

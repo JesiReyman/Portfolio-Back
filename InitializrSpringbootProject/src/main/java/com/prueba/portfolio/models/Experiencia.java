@@ -30,9 +30,9 @@ public class Experiencia {
     private Long experienciaId;
     
     private String tituloExperiencia;
-    @JsonFormat(pattern="yyyy")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date anioInicio;
-    @JsonFormat(pattern="yyyy")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date anioFin;
     private boolean actualidad;
     private String descripcionExperiencia;

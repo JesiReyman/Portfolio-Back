@@ -12,9 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Range;
 
 @Getter @Setter
 @NoArgsConstructor
@@ -28,6 +31,7 @@ public class Skill {
     private Long skillId;
     
     private String nombreSkill;
+    @Range(min = 1, max = 100)
     private int nivelSkill;
 
     @ManyToOne(fetch = FetchType.LAZY)

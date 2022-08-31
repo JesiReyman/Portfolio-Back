@@ -1,24 +1,12 @@
 
 package com.prueba.portfolio.controller;
 
-import com.prueba.portfolio.models.Educacion;
+
 import com.prueba.portfolio.models.Perfil;
-import com.prueba.portfolio.security.entity.UsuarioLogin;
-import com.prueba.portfolio.security.entity.UsuarioPrincipal;
-import com.prueba.portfolio.security.service.UserDetailsImplements;
-import com.prueba.portfolio.security.service.UsuarioLoginService;
 import com.prueba.portfolio.services.PerfilService;
-import java.security.Principal;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
-//@CrossOrigin(origins = "https://portfolio-9dcf2.web.app")
+//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://portfolio-9dcf2.web.app")
 @RequestMapping("/perfil")
 public class PerfilController {
     private final PerfilService perfilService;

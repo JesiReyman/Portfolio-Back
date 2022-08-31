@@ -15,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,8 +35,8 @@ public class Educacion {
     
     private String tituloEdu;
   
+    @JsonFormat(pattern = "yyyy-MM-dd")
     //@Temporal(TemporalType.DATE)
-    @JsonFormat(pattern = "yyyy")
     private Date anioInicio;
     private String estado;
     private String descripcionEdu;
